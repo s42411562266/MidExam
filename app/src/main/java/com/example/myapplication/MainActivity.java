@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ReverseB(View v){
+        int FF=0;
         int [][]RGBB=new int[5][3];
         RGBB[0][0]=255;RGBB[0][1]=0;RGBB[0][2]=0;//red
         RGBB[1][0]=255;RGBB[1][1]=165;RGBB[1][2]=0;//orange
@@ -85,16 +86,21 @@ public class MainActivity extends AppCompatActivity {
         RGBB[3][0]=0;RGBB[3][1]=255;RGBB[3][2]=0;//green
         RGBB[4][0]=0;RGBB[4][1]=255;RGBB[4][2]=255;//
         StringBuffer str2=new StringBuffer();
-        for(int i=0;i<strF;i++)
-            str2.append(base[i]);
-        displays=new StringBuffer(str2);
-        SpannableStringBuilder style = new SpannableStringBuilder(displays);
-        int temp=0;
-        for(int k=0;k<strF;k++){
-            style.setSpan(new ForegroundColorSpan(Color.rgb(RGBB[(colorC)%5][0],RGBB[(colorC)%5][1],RGBB[(colorC++)%5][2])),temp,base[k].length()+temp, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-            temp+=base[k].length();
-        }
-        text.setText(style);
-        text.setTextSize(size);
+        String []temp=new String[base.length];
+        for(int o=strF-1;o>=0;o--)
+            temp[FF++]=String.valueOf(base[o]);
+
+        base=Arrays.copyOf(temp,temp.length);
+            for(int i=0;i<strF;i++)
+                str2.append(base[i]);
+            displays=new StringBuffer(str2);
+            SpannableStringBuilder style = new SpannableStringBuilder(displays);
+            int temp2=0;
+            for(int k=0;k<strF;k++){
+                style.setSpan(new ForegroundColorSpan(Color.rgb(RGBB[(colorC)%5][0],RGBB[(colorC)%5][1],RGBB[(colorC++)%5][2])),temp2,base[k].length()+temp2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                temp2+=base[k].length();
+            }
+            text.setText(style);
+            text.setTextSize(size);
     }
 }
